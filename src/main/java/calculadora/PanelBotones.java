@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tarea4GUI;
+package calculadora;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+
 /**
  *
  * @author raquel
  */
-public class PanelBotones {
+public class PanelBotones extends JPanel {
 
     // Números del 0 al 9 y seis botones más para
     // suma, resta, multiplicacion, división, resultado y limpiar
@@ -36,6 +37,7 @@ public class PanelBotones {
         grupoBotones[14] = new JButton("=");
         grupoBotones[15] = new JButton("C");
 
+       
         // Establecemos el layout
         this.setLayout(new GridLayout(4, 4));
 
