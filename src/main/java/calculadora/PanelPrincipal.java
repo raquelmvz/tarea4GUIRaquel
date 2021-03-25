@@ -54,7 +54,11 @@ public class PanelPrincipal extends JPanel {
                     Object obj = ae.getSource();
 
                     if (obj instanceof JButton) {
-                        areaTexto.setText(areaTexto.getText() + (((JButton) obj).getText()));
+
+                        if (((JButton) obj).getText() != "+" && ((JButton) obj).getText() != "-"
+                                && ((JButton) obj).getText() != "=") {
+                            areaTexto.setText(areaTexto.getText() + (((JButton) obj).getText()));
+                        }
 
                     }
                 }
