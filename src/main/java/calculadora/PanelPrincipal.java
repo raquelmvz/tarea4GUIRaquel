@@ -50,27 +50,18 @@ public class PanelPrincipal extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
 
+                    //Objeto que se acciona
                     Object obj = ae.getSource();
 
                     if (obj instanceof JButton) {
-                        areaTexto.setText(((JButton) obj).getText());
+                        areaTexto.setText(areaTexto.getText() + (((JButton) obj).getText()));
+
                     }
                 }
             });
+
         }
 
     }
 
-    public void actionPerformed(ActionEvent ae) {
-
-//        // Se obtiene el objeto que desencadena el evento
-//        Object o = ae.getSource();
-//        // Si es un botón
-//        if (o instanceof JButton) {
-//            JButton aux = (JButton) o;
-//
-//            areaTexto.setText(aux.getText());
-//
-//        }
-    }
 }
