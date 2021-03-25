@@ -45,6 +45,32 @@ public class PanelPrincipal extends JPanel {
         this.add(areaTexto, BorderLayout.NORTH);
         this.add(botonera, BorderLayout.SOUTH);
 
+        for (JButton boton : this.botonera.getgrupoBotones()) {
+            boton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+
+                    Object obj = ae.getSource();
+
+                    if (obj instanceof JButton) {
+                        areaTexto.setText(((JButton) obj).getText());
+                    }
+                }
+            });
+        }
+
     }
 
+    public void actionPerformed(ActionEvent ae) {
+
+//        // Se obtiene el objeto que desencadena el evento
+//        Object o = ae.getSource();
+//        // Si es un botón
+//        if (o instanceof JButton) {
+//            JButton aux = (JButton) o;
+//
+//            areaTexto.setText(aux.getText());
+//
+//        }
+    }
 }
