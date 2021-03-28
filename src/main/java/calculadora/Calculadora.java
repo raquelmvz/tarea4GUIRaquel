@@ -13,6 +13,9 @@ import javax.swing.JFrame;
  */
 public class Calculadora {
 
+    /* Hace calculo de suma, resta, multiplicacion y division de varios elementos en orden
+    No respeta el orden matematico de * y / primero
+     */
     public static void main(String[] args) {
 
         JFrame frame = new JFrame("Calculadora");

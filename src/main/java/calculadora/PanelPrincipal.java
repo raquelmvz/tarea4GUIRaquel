@@ -145,10 +145,11 @@ public class PanelPrincipal extends JPanel {
                             case "=":
                                 operandos.add(operando);
                                 operando = "";
-                                String solucion = actualizarCalculos(tipoOperacion);
+                                actualizarCalculos(tipoOperacion);
                                 tipoOperacion = -1;
 
-                                areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText() + solucion);
+                                areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText() + operandos.get(0));
+
                                 break;
 
                             default:
@@ -171,6 +172,7 @@ public class PanelPrincipal extends JPanel {
     }
 
     //Metodo para realizar la operacion que toque
+    //se pasa como parametro un numero que identifica el tipo de operacion a realizar
     public String actualizarCalculos(int tipo) {
 
         switch (tipo) {
@@ -205,7 +207,7 @@ public class PanelPrincipal extends JPanel {
 
                 double resultadoMulti = 0;
 
-                //resto los operandos hasta el momento
+                //multiplico los operandos hasta el momento
                 resultadoMulti = Double.parseDouble(operandos.get(0)) * Double.parseDouble(operandos.get(1));
 
                 //elimino los operandos de la lista
@@ -218,7 +220,7 @@ public class PanelPrincipal extends JPanel {
 
                 double resultadoDiv = 0;
 
-                //resto los operandos hasta el momento
+                //divido los operandos hasta el momento
                 resultadoDiv = Double.parseDouble(operandos.get(0)) / Double.parseDouble(operandos.get(1));
 
                 //elimino los operandos de la lista
