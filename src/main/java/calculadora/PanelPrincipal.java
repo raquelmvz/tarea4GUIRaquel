@@ -25,6 +25,8 @@ public class PanelPrincipal extends JPanel {
     private JTextArea areaTexto;
     private int tipoOperacion;
     private String operando;
+    private ArrayList<String> operandos;
+    //private String resultadoOperacion;
 
     // Constructor
     public PanelPrincipal() {
@@ -47,7 +49,8 @@ public class PanelPrincipal extends JPanel {
         this.add(areaTexto, BorderLayout.NORTH);
         this.add(botonera, BorderLayout.SOUTH);
 
-        ArrayList<String> operandos = new ArrayList<>();
+        operandos = new ArrayList<>();
+
         operando = "";
 
         for (JButton boton : this.botonera.getgrupoBotones()) {
@@ -62,48 +65,111 @@ public class PanelPrincipal extends JPanel {
                     //el objeto es un boton
                     if (obj instanceof JButton) {
 
-//                        if (((JButton) obj).getText() != "+") {
-//                            operando += ((JButton) obj).getText();
-//                            areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
-//                        }
-//
-//                        System.out.println("operando:  " + operando);
                         String contenidoBoton = ((JButton) obj).getText();
-                        //System.out.println("contenido -- " + contenidoBoton);
 
-                        if (contenidoBoton == "+") {
-                            //System.out.println("operando --" + operando);
+                        switch (contenidoBoton) {
+                            case "+":
+                                operandos.add(operando);
+                                operando = "";
+                                if (tipoOperacion != -1) {
+                                    actualizarCalculos(tipoOperacion);
+
+                                }
+                                tipoOperacion = 1;
+                                areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
+                                break;
+
+                            case "-":
+                                operandos.add(operando);
+                                operando = "";
+                                if (tipoOperacion != -1) {
+                                    actualizarCalculos(tipoOperacion);
+
+                                }
+                                tipoOperacion = 2;
+                                areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
+                                break;
+
+                            case "=":
+                                operandos.add(operando);
+                                operando = "";
+                                String solucion = actualizarCalculos(tipoOperacion);
+                                //limpio la lista de operandos
+                                operandos.clear();
+
+                                areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText() + solucion);
+                                break;
+                            default:
+                                operando += contenidoBoton;
+                                areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
+
+                            //areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
+                        }
+                        /*if (contenidoBoton == "+") {
                             operandos.add(operando);
-                            //System.out.println("lsita -- " + operandos.toString());
                             operando = "";
                             areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
                         } else if (contenidoBoton == "=") {
-                            //System.out.println("lsita op --" + operandos.toString());
                             operandos.add(operando);
 
                             double resultadoSuma = 0;
-                            //System.out.println(resultadoSuma);
                             for (String op : operandos) {
 
                                 resultadoSuma += Double.parseDouble(op);
-                                //System.out.println(resultadoSuma);
 
                             }
+                            operandos.clear();
 
                             String resultadoString = String.valueOf(resultadoSuma);
 
                             areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText() + resultadoString);
                         } else {
-                            //System.out.println("operando antes -" + operando);
                             operando += contenidoBoton;
-                            //System.out.println("operando despues - " + operando);
-                            //System.out.println("lsita -- " + operandos.toString());
                             areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
-                        }
+                        }*/
                     }
                 }
             });
 
+        }
+
+    }
+
+    //Metodo para realizar la operacion que toque
+    public String actualizarCalculos(int tipo) {
+
+        switch (tipo) {
+            //tipo 1 es la suma
+            case 1:
+
+                double resultadoSuma = 0;
+
+                //sumo los operandos hasta el momento
+                resultadoSuma = Double.parseDouble(operandos.get(0)) + Double.parseDouble(operandos.get(1));
+                //elimino los operandos de la lista
+                operandos.clear();
+                //añado como operando el resultado de la operacion
+                operandos.add(String.valueOf(resultadoSuma));
+                return String.valueOf(resultadoSuma);
+
+            //tipo 2 es la resta
+            case 2:
+
+                double resultadoResta = 0;
+
+                //resto los operandos hasta el momento
+                resultadoResta = Double.parseDouble(operandos.get(0)) - Double.parseDouble(operandos.get(1));
+
+                //elimino los operandos de la lista
+                operandos.clear();
+                //añado como operando el resultado de la operacion
+                operandos.add(String.valueOf(resultadoResta));
+                return String.valueOf(resultadoResta);
+
+            default:
+                return "0";
+
+            //case 2:
         }
 
     }
