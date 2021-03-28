@@ -123,6 +123,15 @@ public class PanelPrincipal extends JPanel {
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
                                 break;
 
+                            case "C":
+
+                                //borra todo y lo pone a 0
+                                operando = "";
+                                operandos.clear();
+                                tipoOperacion = -1;
+                                areaTexto.setText("");
+                                break;
+
                             case "=":
                                 operandos.add(operando);
                                 operando = "";
@@ -132,6 +141,7 @@ public class PanelPrincipal extends JPanel {
 
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText() + solucion);
                                 break;
+
                             default:
                                 //mientras los botones que se clican sean digitos se van concatenando 
                                 //para formar un operando
