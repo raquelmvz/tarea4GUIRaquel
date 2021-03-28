@@ -68,13 +68,21 @@ public class PanelPrincipal extends JPanel {
                         String contenidoBoton = ((JButton) obj).getText();
 
                         switch (contenidoBoton) {
+                            
                             case "+":
+                                //al accionar un operador el numero que se haya formado
+                                //hasta el momento se añade a una lista de operandos
                                 operandos.add(operando);
+                                //se borra el contenido de operando para formar uno nuevo
                                 operando = "";
+                                //si se ha establecido ya un tipo de operacion antes se actualizan los resultados
+                                //(esto es para ir haciendo los calculos de dos en dos por orden
+                                //por si queremos por ej sumar dos operandos y luego restarle otro
                                 if (tipoOperacion != -1) {
                                     actualizarCalculos(tipoOperacion);
 
                                 }
+                                //el num 1 indicara que se trata de una suma en el metodo actualizarCalculos
                                 tipoOperacion = 1;
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
                                 break;
@@ -86,7 +94,20 @@ public class PanelPrincipal extends JPanel {
                                     actualizarCalculos(tipoOperacion);
 
                                 }
+                                //el num 2 indicara que se trata de una resta en el metodo actualizarCalculos
                                 tipoOperacion = 2;
+                                areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
+                                break;
+                                
+                            case "*":
+                                operandos.add(operando);
+                                operando = "";
+                                if (tipoOperacion != -1) {
+                                    actualizarCalculos(tipoOperacion);
+
+                                }
+                                //el num 3 indicara que se trata de una multiplicacion en el metodo actualizarCalculos
+                                tipoOperacion = 3;
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
                                 break;
 
@@ -94,12 +115,14 @@ public class PanelPrincipal extends JPanel {
                                 operandos.add(operando);
                                 operando = "";
                                 String solucion = actualizarCalculos(tipoOperacion);
-                                //limpio la lista de operandos
-                                operandos.clear();
+//                                //limpio la lista de operandos
+//                                operandos.clear();
 
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText() + solucion);
                                 break;
                             default:
+                                //mientras los botones que se clican sean digitos se van concatenando 
+                                //para formar un operando
                                 operando += contenidoBoton;
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
 
@@ -165,11 +188,25 @@ public class PanelPrincipal extends JPanel {
                 //añado como operando el resultado de la operacion
                 operandos.add(String.valueOf(resultadoResta));
                 return String.valueOf(resultadoResta);
+                
+            case 3:
+                
+                double resultadoMulti = 0;
+
+                //resto los operandos hasta el momento
+                resultadoMulti = Double.parseDouble(operandos.get(0)) * Double.parseDouble(operandos.get(1));
+
+                //elimino los operandos de la lista
+                operandos.clear();
+                //añado como operando el resultado de la operacion
+                operandos.add(String.valueOf(resultadoMulti));
+                return String.valueOf(resultadoMulti);
+                
 
             default:
                 return "0";
 
-            //case 2:
+            
         }
 
     }
