@@ -68,7 +68,7 @@ public class PanelPrincipal extends JPanel {
                         String contenidoBoton = ((JButton) obj).getText();
 
                         switch (contenidoBoton) {
-                            
+
                             case "+":
                                 //al accionar un operador el numero que se haya formado
                                 //hasta el momento se añade a una lista de operandos
@@ -98,7 +98,7 @@ public class PanelPrincipal extends JPanel {
                                 tipoOperacion = 2;
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
                                 break;
-                                
+
                             case "*":
                                 operandos.add(operando);
                                 operando = "";
@@ -108,6 +108,18 @@ public class PanelPrincipal extends JPanel {
                                 }
                                 //el num 3 indicara que se trata de una multiplicacion en el metodo actualizarCalculos
                                 tipoOperacion = 3;
+                                areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
+                                break;
+
+                            case "/":
+                                operandos.add(operando);
+                                operando = "";
+                                if (tipoOperacion != -1) {
+                                    actualizarCalculos(tipoOperacion);
+
+                                }
+                                //el num 4 indicara que se trata de una division en el metodo actualizarCalculos
+                                tipoOperacion = 4;
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
                                 break;
 
@@ -188,9 +200,9 @@ public class PanelPrincipal extends JPanel {
                 //añado como operando el resultado de la operacion
                 operandos.add(String.valueOf(resultadoResta));
                 return String.valueOf(resultadoResta);
-                
+
             case 3:
-                
+
                 double resultadoMulti = 0;
 
                 //resto los operandos hasta el momento
@@ -201,12 +213,23 @@ public class PanelPrincipal extends JPanel {
                 //añado como operando el resultado de la operacion
                 operandos.add(String.valueOf(resultadoMulti));
                 return String.valueOf(resultadoMulti);
-                
+
+            case 4:
+
+                double resultadoDiv = 0;
+
+                //resto los operandos hasta el momento
+                resultadoDiv = Double.parseDouble(operandos.get(0)) / Double.parseDouble(operandos.get(1));
+
+                //elimino los operandos de la lista
+                operandos.clear();
+                //añado como operando el resultado de la operacion
+                operandos.add(String.valueOf(resultadoDiv));
+                return String.valueOf(resultadoDiv);
 
             default:
                 return "0";
 
-            
         }
 
     }
