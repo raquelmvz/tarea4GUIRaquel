@@ -26,7 +26,6 @@ public class PanelPrincipal extends JPanel {
     private int tipoOperacion;
     private String operando;
     private ArrayList<String> operandos;
-    //private String resultadoOperacion;
 
     // Constructor
     public PanelPrincipal() {
@@ -50,7 +49,6 @@ public class PanelPrincipal extends JPanel {
         this.add(botonera, BorderLayout.SOUTH);
 
         operandos = new ArrayList<>();
-
         operando = "";
 
         for (JButton boton : this.botonera.getgrupoBotones()) {
@@ -85,6 +83,9 @@ public class PanelPrincipal extends JPanel {
                                 //el num 1 indicara que se trata de una suma en el metodo actualizarCalculos
                                 tipoOperacion = 1;
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
+
+                                //para que no se puedan clicar otros botones de operaciones
+                                desactivarOperadores();
                                 break;
 
                             case "-":
@@ -97,6 +98,9 @@ public class PanelPrincipal extends JPanel {
                                 //el num 2 indicara que se trata de una resta en el metodo actualizarCalculos
                                 tipoOperacion = 2;
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
+
+                                //para que no se puedan clicar otros botones de operaciones
+                                desactivarOperadores();
                                 break;
 
                             case "*":
@@ -109,6 +113,9 @@ public class PanelPrincipal extends JPanel {
                                 //el num 3 indicara que se trata de una multiplicacion en el metodo actualizarCalculos
                                 tipoOperacion = 3;
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
+
+                                //para que no se puedan clicar otros botones de operaciones
+                                desactivarOperadores();
                                 break;
 
                             case "/":
@@ -121,6 +128,9 @@ public class PanelPrincipal extends JPanel {
                                 //el num 4 indicara que se trata de una division en el metodo actualizarCalculos
                                 tipoOperacion = 4;
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
+
+                                //para que no se puedan clicar otros botones de operaciones
+                                desactivarOperadores();
                                 break;
 
                             case "C":
@@ -136,8 +146,7 @@ public class PanelPrincipal extends JPanel {
                                 operandos.add(operando);
                                 operando = "";
                                 String solucion = actualizarCalculos(tipoOperacion);
-//                                //limpio la lista de operandos
-//                                operandos.clear();
+                                tipoOperacion = -1;
 
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText() + solucion);
                                 break;
@@ -148,30 +157,11 @@ public class PanelPrincipal extends JPanel {
                                 operando += contenidoBoton;
                                 areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
 
-                            //areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
+                                //para volver a activar los botones
+                                activarOperadores();
+
                         }
-                        /*if (contenidoBoton == "+") {
-                            operandos.add(operando);
-                            operando = "";
-                            areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
-                        } else if (contenidoBoton == "=") {
-                            operandos.add(operando);
 
-                            double resultadoSuma = 0;
-                            for (String op : operandos) {
-
-                                resultadoSuma += Double.parseDouble(op);
-
-                            }
-                            operandos.clear();
-
-                            String resultadoString = String.valueOf(resultadoSuma);
-
-                            areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText() + resultadoString);
-                        } else {
-                            operando += contenidoBoton;
-                            areaTexto.setText(areaTexto.getText() + ((JButton) obj).getText());
-                        }*/
                     }
                 }
             });
@@ -242,6 +232,22 @@ public class PanelPrincipal extends JPanel {
 
         }
 
+    }
+
+    public void desactivarOperadores() {
+        botonera.grupoBotones[10].setEnabled(false);
+        botonera.grupoBotones[11].setEnabled(false);
+        botonera.grupoBotones[12].setEnabled(false);
+        botonera.grupoBotones[13].setEnabled(false);
+        botonera.grupoBotones[14].setEnabled(false);
+    }
+
+    public void activarOperadores() {
+        botonera.grupoBotones[10].setEnabled(true);
+        botonera.grupoBotones[11].setEnabled(true);
+        botonera.grupoBotones[12].setEnabled(true);
+        botonera.grupoBotones[13].setEnabled(true);
+        botonera.grupoBotones[14].setEnabled(true);
     }
 
 }
