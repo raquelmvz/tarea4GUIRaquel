@@ -160,6 +160,7 @@ public class PanelPrincipal extends JPanel {
 
                                 //para volver a activar los botones
                                 activarOperadores();
+                                break;
 
                         }
 
